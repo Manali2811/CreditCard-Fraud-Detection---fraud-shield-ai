@@ -1,0 +1,158 @@
+:root {
+  font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+  color: #0f172a;
+  background: #f8fafc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.hero {
+  padding: 22px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #111827, #1e3a8a);
+  color: #f8fafc;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  margin: 0 0 8px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.feature-help {
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.feature-help summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #1e3a8a;
+}
+
+.feature-help p {
+  margin: 10px 0 0;
+}
+
+.feature-help p:first-of-type {
+  margin-top: 12px;
+}
+
+.simulate-lead {
+  margin: 0 0 12px;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+input {
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+button {
+  background: #1d4ed8;
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  padding: 9px 14px;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.status {
+  font-weight: 600;
+}
+
+.metrics .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.metrics .grid > div {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.feature-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.result .risk {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.result .high {
+  color: #b91c1c;
+}
+
+.result .low {
+  color: #166534;
+}
+
+.hint {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e3a8a;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.error {
+  color: #b91c1c;
+  font-weight: 600;
+}

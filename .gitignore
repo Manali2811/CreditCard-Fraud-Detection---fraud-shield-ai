@@ -1,0 +1,7 @@
+backend/__pycache__/
+backend/models/*.joblib
+frontend/node_modules/
+frontend/dist/
+*.pyc
+.env
+frontend/tsconfig.tsbuildinfo
