@@ -1,7 +1,8 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = (import.meta.env.VITE_API_URL || "http://127.0.0.1:8000").replace(/\/$/, "");
+const inferenceOnly = import.meta.env.VITE_INFERENCE_ONLY === "true";
 
 type Metrics = {
   dataset_id: string;
@@ -43,7 +44,7 @@ export default function App() {
       setHealth(data.model_loaded ? "API online - model ready" : "API online - model not trained");
     } catch (e) {
       setHealth("API unreachable");
-      setError("Cannot connect to backend at http://127.0.0.1:8000");
+      setError(`Cannot connect to backend at ${API_URL}`);
     }
   }
 
@@ -103,11 +104,21 @@ export default function App() {
     }
   }
 
+  useEffect(() => {
+    if (!inferenceOnly) return;
+    void loadFeatures();
+    void checkHealth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- bootstrap once for public inference build
+  }, []);
+
   return (
     <div className="page">
       <header className="hero">
         <h1>FraudShield AI</h1>
         <p>Portfolio-ready credit card fraud detection platform (FastAPI + React + Hugging Face data).</p>
+        {inferenceOnly && (
+          <p className="hero-note">Live demo: pre-trained model — training is done offline.</p>
+        )}
       </header>
 
       <section className="card">
@@ -118,6 +129,7 @@ export default function App() {
         </div>
       </section>
 
+      {!inferenceOnly && (
       <section className="card">
         <h2>2) Train model from Hugging Face</h2>
         <div className="row">
@@ -130,8 +142,9 @@ export default function App() {
           Until you train once, the API has no model — use <strong>Train Model</strong> first (downloads from Hugging Face; first run may take several minutes). Then use <strong>Load Features</strong> or predict.
         </p>
       </section>
+      )}
 
-      {metrics && (
+      {!inferenceOnly && metrics && (
         <section className="card metrics">
           <h2>3) Model quality snapshot</h2>
           <div className="grid">
@@ -147,7 +160,7 @@ export default function App() {
 
       {topFeatures.length > 0 && (
         <section className="card">
-          <h2>4) Simulate a transaction</h2>
+          <h2>{inferenceOnly ? "2)" : "4)"} Simulate a transaction</h2>
           <details className="feature-help">
             <summary>What do V1, V2, V3… mean?</summary>
             <p>

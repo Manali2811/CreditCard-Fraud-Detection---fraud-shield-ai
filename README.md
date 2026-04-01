@@ -36,20 +36,48 @@ Compatibility expectations:
 ### 1) Backend
 
 ```powershell
-cd "..:\...\...\fraud-shield-ai\backend"
-pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
+cd backend
+python -m pip install -r requirements.txt
+python -m uvicorn app.main:app --reload --port 8000
 ```
 
 ### 2) Frontend
 
 ```powershell
-cd "..:\..\..\fraud-shield-ai\frontend"
+cd frontend
 npm install
 npm run dev
 ```
 
-Open the UI at `http://localhost:0000`.
+Open the UI at `http://localhost:5173`.
+
+## Deploy (inference-only, free tier)
+
+Use a **pre-trained model** in `backend/models/` (train once on your PC, then commit `fraud_model.joblib` + `metadata.joblib`). Hosted free tiers are not reliable for long `/train` jobs.
+
+### Backend (example: Render)
+
+1. New **Web Service**, connect the GitHub repo.
+2. **Root Directory:** `backend`
+3. **Build Command:** `pip install -r requirements.txt`
+4. **Start Command:** `python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+5. Copy the public URL (e.g. `https://your-api.onrender.com`).
+
+### Frontend (example: Vercel)
+
+1. New project from the same repo.
+2. **Root Directory:** `frontend`
+3. **Build Command:** `npm run build`
+4. **Output Directory:** `dist`
+5. **Environment variables:**
+   - `VITE_API_URL` = your Render URL (no trailing slash), e.g. `https://your-api.onrender.com`
+   - `VITE_INFERENCE_ONLY` = `true` (hides training UI; loads features on load)
+
+Copy `frontend/.env.example` to `frontend/.env.production` locally only if you want to test a production build; on Vercel set the same vars in the dashboard.
+
+### CORS
+
+The API allows all origins in dev. For a stricter production setup, restrict `allow_origins` in `backend/app/main.py` to your Vercel domain.
 
 ## API quick check
 

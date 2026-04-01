@@ -30,6 +30,13 @@ body {
   margin: 0 0 8px;
 }
 
+.hero-note {
+  margin: 12px 0 0;
+  font-size: 0.92rem;
+  opacity: 0.92;
+  max-width: 52ch;
+}
+
 .card {
   background: #fff;
   border: 1px solid #e2e8f0;
