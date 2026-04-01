@@ -36,7 +36,7 @@ Compatibility expectations:
 ### 1) Backend
 
 ```powershell
-cd "C:\Manali\Projects\fraud-shield-ai\backend"
+cd "..:\...\...\fraud-shield-ai\backend"
 pip install -r requirements.txt
 uvicorn app.main:app --reload --port 8000
 ```
@@ -44,12 +44,12 @@ uvicorn app.main:app --reload --port 8000
 ### 2) Frontend
 
 ```powershell
-cd "C:\Manali\Projects\fraud-shield-ai\frontend"
+cd "..:\..\..\fraud-shield-ai\frontend"
 npm install
 npm run dev
 ```
 
-Open the UI at `http://localhost:5173`.
+Open the UI at `http://localhost:0000`.
 
 ## API quick check
 
